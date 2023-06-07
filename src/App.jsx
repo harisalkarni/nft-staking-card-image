@@ -67,6 +67,9 @@ function App() {
 
   const handleCancel = () => {
     clearInterval(startTimer.current);
+    setTimer60(5);
+    setTimer90(10);
+    setTimer120(15);
     setStart60(false);
     setStart90(false);
     setStart120(false);
