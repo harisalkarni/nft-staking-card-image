@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
 import { data } from "./dummyData";
 import CardComponent from "./components/CardComponent";
@@ -15,18 +15,18 @@ function App() {
   const [start120, setStart120] = useState(false);
   const [walletBalance, setWalletBalance] = useState(100);
 
-  let startTimer;
+  let startTimer = useRef(null);
 
   const handleTimer60 = () => {
     setStart60(true);
-    startTimer = setInterval(() => {
+    startTimer.current = setInterval(() => {
       setTimer60((prevTimer) => {
         if (prevTimer > 0) {
           return prevTimer - 1;
         } else {
           setStart60(false);
           setWalletBalance(walletBalance + 10);
-          clearInterval(startTimer);
+          clearInterval(startTimer.current);
           setTimer60(5);
         }
       });
@@ -35,14 +35,14 @@ function App() {
 
   const handleTimer90 = () => {
     setStart90(true);
-    startTimer = setInterval(() => {
+    startTimer.current = setInterval(() => {
       setTimer90((prevTimer) => {
         if (prevTimer > 0) {
           return prevTimer - 1;
         } else {
           setStart90(false);
           setWalletBalance(walletBalance + 20);
-          clearInterval(startTimer);
+          clearInterval(startTimer.current);
           setTimer90(10);
         }
       });
@@ -51,31 +51,25 @@ function App() {
 
   const handleTimer120 = () => {
     setStart120(true);
-    startTimer = setInterval(() => {
+    startTimer.current = setInterval(() => {
       setTimer120((prevTimer) => {
         if (prevTimer > 0) {
           return prevTimer - 1;
         } else {
           setStart120(false);
           setWalletBalance(walletBalance + 30);
-          clearInterval(startTimer);
+          clearInterval(startTimer.current);
           setTimer120(15);
         }
       });
     }, 1000);
   };
 
-  console.log(walletBalance);
-  console.log(start60);
-
   const handleCancel = () => {
-    clearInterval(startTimer);
+    clearInterval(startTimer.current);
     setStart60(false);
     setStart90(false);
     setStart120(false);
-    setTimer60(5);
-    setTimer90(10);
-    setTimer120(15);
     setWalletBalance((prevAmount) => prevAmount - 5);
   };
 
