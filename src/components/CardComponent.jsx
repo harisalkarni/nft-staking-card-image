@@ -9,5 +9,5 @@ const CardComponent = ({ imgUrl, type, title }) => {
     </div>
   );
 };
-
+// test commit
 export default CardComponent;
